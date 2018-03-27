@@ -42,9 +42,18 @@ package CompanyMVC;
     // Returns: NA
     // *****************************************************
         protected void submitButtonClicked(String fn, String ln, String c, String p, int s){
-            
+            e = new Employee(fn, ln, c, p, s); //creates new employee with data entered
+            employees.add(e); //adds new employee to list
+            ui.employeeListModel.addElement(e); //adds new employee to list on GUI
         }//end of SubmitButtonClicked
         
  	// ********** mutators **********
- 
+    //*****************************************************
+    // Purpose: sets the ui which the controller interacts with 
+    // Interface: IN: UI
+    // Returns: NA
+    // *****************************************************
+        public void setUI (EmployeeGUI UI){
+            this.ui = UI;
+        }//end of setUI
  }  // end class

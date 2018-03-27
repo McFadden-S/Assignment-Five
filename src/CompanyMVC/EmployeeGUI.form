@@ -190,7 +190,7 @@
               <StringArray count="5">
                 <StringItem index="0" value="Select One"/>
                 <StringItem index="1" value="New York"/>
-                <StringItem index="2" value="Silicon Vally"/>
+                <StringItem index="2" value="Silicon Valley"/>
                 <StringItem index="3" value="Ottawa"/>
                 <StringItem index="4" value="Beijing"/>
               </StringArray>

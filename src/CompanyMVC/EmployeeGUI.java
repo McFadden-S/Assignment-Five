@@ -1,5 +1,7 @@
 package CompanyMVC;
 
+import javax.swing.DefaultListModel;
+
 
 /**
  *
@@ -11,7 +13,7 @@ public class EmployeeGUI extends javax.swing.JFrame {
         "R&D Scientist", "Engineer", "Computer Scientist", "Sales", "Manager", 
         "CTO", "COO", "Lawyer", "Marketing"}; //all positions
     private final String[] CITL = new String[] {"New York", 
-        "Silicon Vally", "Ottawa", "Beijing"}; //all cities
+        "Silicon Valley", "Ottawa", "Beijing"}; //all cities
     
     private final String[] NYPOS = new String[] {"Sales", "Manager", 
         "CTO", "COO", "Lawyer", "Marketing"}; //positions in New York
@@ -55,6 +57,10 @@ public class EmployeeGUI extends javax.swing.JFrame {
     //Marketing Salary: first is min, second is max
     //third is major tics, fourth is minor tics
     private final int[] MKSAL = new int[] {50000, 70000, 2000, 1000};
+    
+    protected Controller con;//links GUI to controller
+    //list that will be repersented as the list on the gui
+    protected DefaultListModel employeeListModel = new DefaultListModel();
     
     private String Ci = ""; //string for city designation
     private String Po = ""; //string for position designation
@@ -122,7 +128,7 @@ public class EmployeeGUI extends javax.swing.JFrame {
         CityLabel.setText(" City ");
         CityLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        CityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select One", "New York", "Silicon Vally", "Ottawa", "Beijing" }));
+        CityCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select One", "New York", "Silicon Valley", "Ottawa", "Beijing" }));
         CityCombo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 CityComboItemStateChanged(evt);

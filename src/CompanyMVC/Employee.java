@@ -22,8 +22,6 @@ package CompanyMVC;
         private static int nextID = 1000; //next patient id number
         
  	// *********** class constants **********
- 	
- 	
  	// ********** instance variable **********
  	
         private String firstName; //first name of employee
@@ -78,7 +76,66 @@ package CompanyMVC;
         }//end of initialized constructor
         
  	// ********** accessors **********
- 	
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }//end of setFirstName
+    
+     //*****************************************************
+    // Purpose: set last name of employee
+    // Interface: IN: new last name
+    // Returns: na
+    // *****************************************************
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }//end of setLastName
+    
+    //*****************************************************
+    // Purpose: sets city of employee
+    // Interface: IN: new next city
+    // Returns: na
+    // *****************************************************
+    public void setCity(String city) {
+        this.city = city;
+    }//end of setCity
+    
+    //*****************************************************
+    // Purpose: set position of employee
+    // Interface: IN: new position
+    // Returns: na
+    // *****************************************************
+    public void setPosition(String position) {
+        this.position = position;
+    }//end of setPosition
+    
+    //*****************************************************
+    // Purpose: set salary of employee
+    // Interface: IN: new next id number
+    // Returns: na
+    // *****************************************************
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }//end of setSalary
+
+    //*****************************************************
+    // Purpose: set id 
+    // Interface: IN: new id number
+    // Returns: na
+    // *****************************************************
+    public void setId(int id) {
+        this.id = id;
+    }//end of setId
+    
+    //*****************************************************
+    // Purpose: set next id to last loaded employee id + 1
+    // Interface: IN: new next id number
+    // Returns: na
+    // *****************************************************
+     public void setNextId(int n){
+        nextID = n;
+     } // end setNextID
  	// ********** mutators **********
+
+    
  
  }  // end class
