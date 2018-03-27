@@ -19,7 +19,7 @@ package CompanyMVC;
  {  // begin class
  	// *********** class variables **********
      
-        private static int nextID = 1000; //next patient id number
+        private static int nextID = 1000; //next employee id number
         
  	// *********** class constants **********
  	// ********** instance variable **********
@@ -40,7 +40,7 @@ package CompanyMVC;
  Returns: None
  *****************************************************/
         public Employee(){
-            id = nextID++;
+            id = nextID++; //sets employee number
             
             firstName = "John"; //sets a default value for first name
             lastName = "Doe"; //sets a default value for last name
@@ -65,7 +65,7 @@ package CompanyMVC;
                         String c,        //city
                         String p,        //position
                         int s){          //salary
-            id = nextID++;
+            id = nextID++; //sets employee id for employee
             
             firstName = fn; //sets initalized value for first name
             lastName = ln;//sets initalized value for last name
@@ -134,6 +134,7 @@ package CompanyMVC;
      public void setNextId(int n){
         nextID = n;
      } // end setNextID
+     
  	// ********** mutators **********
 
     
