@@ -16,9 +16,6 @@ package CompanyMVC;
  public class TaxCal implements Serializable
  {  // begin class
  	// *********** class variables **********
-     
-        private static int nextID = 1000; //next patient id number
-        
  	// *********** class constants **********
         
  	//2D array for US tax and brackets
@@ -34,8 +31,6 @@ package CompanyMVC;
             {135321, 0.35}, {196830, 0.45}};
  	
  	// ********** instance variable **********
- 	
-        private int id = 0; //tax cal id number number
         private int index = 0; //holds index for array
         
         private String city; //city of employment
@@ -52,8 +47,6 @@ package CompanyMVC;
  Returns: None
  *****************************************************/
         public TaxCal(){
-            id = nextID++;
-            
             city = "XX";//sets a default value for city
             
             salary = 0;//sets a default value for salary
@@ -69,8 +62,6 @@ package CompanyMVC;
         public TaxCal(double s,          //salary
                       String c){        //city
                                   
-            id = nextID++; //sets id number for tax cal
-            
             salary = s; //sets initalized value for salary
             city = c; //sets initalized value for city
         }//end of initialized constructor
@@ -161,14 +152,5 @@ package CompanyMVC;
                 tax = UStax;
             }//end of else 
         }//end of set Tax
-    
-    //*****************************************************
-    // Purpose: set next id to last loaded employee/taxcal id + 1
-    // Interface: IN: new next id number
-    // Returns: na
-    // *****************************************************
-     public void setNextId(int n){
-        nextID = n;
-     } // end setNextID
      
  }  // end class

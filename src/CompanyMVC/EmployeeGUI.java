@@ -560,8 +560,14 @@ public class EmployeeGUI extends javax.swing.JFrame {
     private void EmployeeListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_EmployeeListValueChanged
         
         int n = EmployeeList.getSelectedIndex(); //gets employee selected
-        
+         
+        if (n==-1){ //if nothing is selected index equals -1
+             //clears info screen when nothing is selected
+             EmployeeDetailTxt.setText(""); 
+         }//end of if sentienl value
+         else{
         EmployeeDetailTxt.setText(con.getEmployee(n)); //shows info on selected employee
+         }//end of else
         
     }//GEN-LAST:event_EmployeeListValueChanged
 
@@ -585,7 +591,16 @@ public class EmployeeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_LoadBtnActionPerformed
 
     private void RemoveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveBtnActionPerformed
-        // TODO add your handling code here:
+        
+        int n = EmployeeList.getSelectedIndex(); //gets employee selected
+        
+        con.employees.remove(n); //removes selected employee from controller array
+        employeeListModel.remove(n); //removes selected employee from list
+        
+        AllSaved = false; //employee values have been change
+        
+        resetIDS();
+        
     }//GEN-LAST:event_RemoveBtnActionPerformed
     
     //*****************************************************
@@ -676,6 +691,16 @@ public class EmployeeGUI extends javax.swing.JFrame {
         
         con.loadListButtonClicked(list.get(list.size()-1));
     }//end of loadPatientListModel
+    
+    private void resetIDS(){
+        int nextID = 1000;//base id
+        
+        for(int i = 0; i<con.employees.size(); i++){
+            con.employees.get(i).setId(nextID);//sets new id for employee
+            nextID++;//adds one to id
+        }//end of for
+        loadEmployeeListModel(con.employees);//loads list with new values
+    }//end of resetIDS
     
     /**
      * @param args the command line arguments

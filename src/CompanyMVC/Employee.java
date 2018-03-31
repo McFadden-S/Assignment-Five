@@ -283,7 +283,6 @@ package CompanyMVC;
     // *****************************************************
      public void setNextId(int n){
         nextID = n;
-        tc.setNextId(n);
      } // end setNextID
      
     //*****************************************************
