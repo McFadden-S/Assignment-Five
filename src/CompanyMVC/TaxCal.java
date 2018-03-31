@@ -38,6 +38,7 @@ package CompanyMVC;
         private int salary = 0; //yearly salary
         private int id = 0; //tax cal id number number
         private String city; //city of employment
+        private double[][] tax;
         
  	// ********** constructors ***********
  	
@@ -73,6 +74,10 @@ package CompanyMVC;
         
  	// ********** accessors **********
  	
+        
+    
+ 	// ********** mutators **********
+        
     //*****************************************************
     // Purpose: set salary of employee
     // Interface: IN: new next id number
@@ -90,6 +95,22 @@ package CompanyMVC;
         public void setCity(String city) {
             this.city = city;
         }//end of setCity
- 	// ********** mutators **********
- 
+        
+    //*****************************************************
+    // Purpose: sets the tax for calculation
+    // Interface: IN: None
+    // Returns: None
+    // *****************************************************
+        public void setTax(){
+            if (city.equals("OT")){
+                tax = CAtax; //sets tax to canadian tax
+            }//end of if ottawa
+            else if (city.equals("BI")){
+                tax = CHtax; //sets tax to chinese tax
+            }//end of else if beijing
+            else{
+                tax = UStax;
+            }//end of else 
+        }//end of set Tax
+        
  }  // end class

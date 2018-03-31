@@ -47,6 +47,12 @@ package CompanyMVC;
             ui.employeeListModel.addElement(e); //adds new employee to list on GUI
         }//end of SubmitButtonClicked
         
+        protected void loadListButtonClicked(Employee e){
+            int nid = e.getId();
+            e.setNextId(++nid);
+        }
+        
+        
  	// ********** mutators **********
     //*****************************************************
     // Purpose: sets the ui which the controller interacts with 

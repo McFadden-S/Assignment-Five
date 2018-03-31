@@ -76,12 +76,75 @@ package CompanyMVC;
         }//end of initialized constructor
         
  	// ********** accessors **********
+        
+    //*****************************************************
+    // Purpose: gets first name of employee
+    // Interface: IN: na
+    // Returns: first name
+    // *****************************************************
+    public String getFirstName() {
+        return firstName;
+    }//end of get First Name
+    
+    //*****************************************************
+    // Purpose: gets last name of employee
+    // Interface: IN: na
+    // Returns: last name
+    // *****************************************************
+    public String getLastName() {
+        return lastName;
+    }//end of Get last Name
+    
+    //*****************************************************
+    // Purpose: gets city of employee
+    // Interface: IN: na
+    // Returns: city
+    // *****************************************************
+    public String getCity() {
+        return city;
+    }//end of getCity
+    
+    //*****************************************************
+    // Purpose: gets position of employee
+    // Interface: IN: na
+    // Returns: position
+    // *****************************************************
+    public String getPosition() {
+        return position;
+    }//end of getPosition
+    
+    //*****************************************************
+    // Purpose: gets salary of employee
+    // Interface: IN: na
+    // Returns: salary
+    // *****************************************************
+    public int getSalary() {
+        return salary;
+    }//end of getSalary
+    
+    //*****************************************************
+    // Purpose: gets id of employee
+    // Interface: IN: na
+    // Returns: id
+    // *****************************************************
+    public int getId() {
+        return id;
+    }//end of getID
 
+    
+     
+ 	// ********** mutators **********
+    
+    //*****************************************************
+    // Purpose: set first name of employee
+    // Interface: IN: new first name
+    // Returns: na
+    // *****************************************************
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }//end of setFirstName
     
-     //*****************************************************
+    //*****************************************************
     // Purpose: set last name of employee
     // Interface: IN: new last name
     // Returns: na
@@ -134,9 +197,5 @@ package CompanyMVC;
      public void setNextId(int n){
         nextID = n;
      } // end setNextID
-     
- 	// ********** mutators **********
-
-    
  
  }  // end class

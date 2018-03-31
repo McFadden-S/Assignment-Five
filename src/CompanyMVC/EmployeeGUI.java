@@ -391,14 +391,14 @@ public class EmployeeGUI extends javax.swing.JFrame {
           ResetPositionCombo(OPOS); //resets combo with ottawa value
           PositionCombo.setEnabled(true); //allows access to second box
           
-          Ci = "O";//sets city designation
+          Ci = "OT";//sets city designation
         }//end of if Ottawa
         
         else if (CityCombo.getSelectedItem().toString().equals("Beijing")){
           ResetPositionCombo(BPOS); //resets combo with Beijing value
           PositionCombo.setEnabled(true); //allows access to second box
           
-          Ci = "B";//sets city designation
+          Ci = "BI";//sets city designation
         }//end of if Beijing
 
     }//GEN-LAST:event_CityComboItemStateChanged
