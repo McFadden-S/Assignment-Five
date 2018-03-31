@@ -12,6 +12,11 @@ package CompanyMVC;
  * *************************************************************/
  
  // import files here as needed
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.text.DecimalFormat;
  import java.util.ArrayList;
 
@@ -29,7 +34,7 @@ import java.text.DecimalFormat;
         private Employee e; //variable used to hold new employee
         private String nl = System.lineSeparator(); //used in output formating to create new lines
         
-        DecimalFormat df1 = new DecimalFormat("$###,###,###,###,###.00");
+        private DecimalFormat df1 = new DecimalFormat("$###,###,###,###,###.00");
         
  	// ********** constructors ***********
  	
@@ -82,6 +87,36 @@ import java.text.DecimalFormat;
             
             return strin;
         }//end of getEmployee
+        
+        protected void writeEmployeeList(){
+            try{
+                FileOutputStream fos = new FileOutputStream("Employees.tmp");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                
+                oos.writeObject(employees);
+                oos.close();
+            }//end of try
+            catch (IOException e) {
+                
+            }//end of catch io exception 
+        }//end of writePatientList
+        
+        protected void getEmployeeList(){
+            try{
+                FileInputStream fis = new FileInputStream("Employees.tmp");
+                ObjectInputStream ois = new ObjectInputStream(fis);
+            
+                try{
+                    employees = (ArrayList<Employee>)ois.readObject();
+                    
+                }//end of try
+                catch(ClassNotFoundException e){
+                }//end of catch
+            }//end of first try
+            catch(IOException e){
+            }//end of catch
+            ui.loadEmployeeListModel(employees);
+        }//end of getPatientList
         
  	// ********** mutators **********
     //*****************************************************

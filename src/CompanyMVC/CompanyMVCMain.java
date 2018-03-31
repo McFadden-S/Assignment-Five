@@ -46,6 +46,7 @@ public class CompanyMVCMain {  // begin class
     controller.setUI(employeeUI); //sets the ui controller interfaces with
     employeeUI.setController(controller); //sets controller that ui interfaces with
     
+    employeeUI.con.getEmployeeList();
     // ************************ print output ****************************
 
         // ******** closing message *********

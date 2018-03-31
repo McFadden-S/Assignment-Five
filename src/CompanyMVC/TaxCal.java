@@ -11,9 +11,9 @@ package CompanyMVC;
  * **************************************************************/
  
  // import files here as needed
+  import java.io.Serializable;
  
- 
- public class TaxCal
+ public class TaxCal implements Serializable
  {  // begin class
  	// *********** class variables **********
      

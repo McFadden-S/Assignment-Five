@@ -204,7 +204,7 @@ package CompanyMVC;
         }//end of if position equals Sales
         
         else if (position.toString().equals("MA")){
-            Po = "MA";//sets position name
+            Po = "Manager";//sets position name
         }//end of if position equals Manager
         
         else if (position.toString().equals("L")){

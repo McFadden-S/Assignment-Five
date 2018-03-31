@@ -1,6 +1,8 @@
 package CompanyMVC;
 
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -64,6 +66,8 @@ public class EmployeeGUI extends javax.swing.JFrame {
     
     private String Ci = ""; //string for city designation
     private String Po = ""; //string for position designation
+    
+    private boolean AllSaved = true; //boolean for if all shown data is saved
     
     /**
      * Creates new form EmployeeGUI
@@ -293,8 +297,18 @@ public class EmployeeGUI extends javax.swing.JFrame {
         InformationControlsLabel.setText("Employee Information Controls");
 
         LoadBtn.setText("Load List");
+        LoadBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LoadBtnActionPerformed(evt);
+            }
+        });
 
         RemoveBtn.setText("Remove Employee");
+        RemoveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveBtnActionPerformed(evt);
+            }
+        });
 
         EditBtn.setText("Edit Employee");
 
@@ -534,11 +548,13 @@ public class EmployeeGUI extends javax.swing.JFrame {
         //sends data to controller
         con.submitButtonClicked(firstName, lastName, Ci, Po, salary);
         
+        AllSaved = false; //new employee has been added so all is not saved
         ResetInputs(); //resets/clears inputs
     }//GEN-LAST:event_SubmitBtnActionPerformed
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
-        // TODO add your handling code here:
+        con.writeEmployeeList(); //save the employee
+        AllSaved = true; //sets all saved to true since data was just saved
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void EmployeeListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_EmployeeListValueChanged
@@ -548,6 +564,29 @@ public class EmployeeGUI extends javax.swing.JFrame {
         EmployeeDetailTxt.setText(con.getEmployee(n)); //shows info on selected employee
         
     }//GEN-LAST:event_EmployeeListValueChanged
+
+    private void LoadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadBtnActionPerformed
+       //acts as a sentinel value since confirmation message returns 0 for yes
+       int confirm = 0; 
+        
+        if (AllSaved){
+           confirm = 0; //sets confirm so load will occur
+       }//end of if there is no unsaved data
+        else{
+        confirm = JOptionPane.showConfirmDialog(null, "All Unsaved Data "
+               + "Will Be Deleted.\nDo You Wish To Continue?", "Confirmation", 
+               JOptionPane.YES_NO_OPTION);
+        }//else if there is unsaved data
+        
+       if (confirm == 0){
+        con.getEmployeeList(); //gets employee list
+        AllSaved = true; //list has been reloaded so only saved values show
+       }//end of if confirmed
+    }//GEN-LAST:event_LoadBtnActionPerformed
+
+    private void RemoveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RemoveBtnActionPerformed
     
     //*****************************************************
     // Purpose: resets city combo box
@@ -628,6 +667,15 @@ public class EmployeeGUI extends javax.swing.JFrame {
     protected void setController (Controller C){
         this.con = C; //sets controller to new value
     }//end of setController
+    
+    protected void loadEmployeeListModel(ArrayList<Employee> list){
+        employeeListModel.removeAllElements();
+        for (Employee e: list){
+            employeeListModel.addElement(e);
+        }//end of for
+        
+        con.loadListButtonClicked(list.get(list.size()-1));
+    }//end of loadPatientListModel
     
     /**
      * @param args the command line arguments
