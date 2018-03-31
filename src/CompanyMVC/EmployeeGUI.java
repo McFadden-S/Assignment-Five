@@ -414,7 +414,10 @@ public class EmployeeGUI extends javax.swing.JFrame {
         String city = ""; //holds employee's city
         String position = ""; //holds employee's position
         
-        int salary = SalarySlider.getValue(); //holds employee's salary
+        double salary = SalarySlider.getValue(); //holds employee's salary
+        
+        //sends data to controller
+        con.submitButtonClicked(firstName, lastName, Ci, Po, salary);
         
         ResetInputs(); //resets/clears inputs
     }//GEN-LAST:event_SubmitBtnActionPerformed

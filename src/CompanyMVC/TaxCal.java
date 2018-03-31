@@ -35,11 +35,14 @@ package CompanyMVC;
  	
  	// ********** instance variable **********
  	
-        private int salary = 0; //yearly salary
         private int id = 0; //tax cal id number number
-        private String city; //city of employment
-        private double[][] tax;
+        private int index = 0; //holds index for array
         
+        private String city; //city of employment
+        
+        private double[][] tax; //holds current tax system
+        private double taxCost; //holds current tax cost
+        private double salary = 0; //yearly salary
  	// ********** constructors ***********
  	
 /*****************************************************
@@ -58,12 +61,12 @@ package CompanyMVC;
         
 /*****************************************************
  Purpose: create a new Tax Calculator object with initialized values
- Interface: IN: salary s: int
+ Interface: IN: salary s: double
 		city c: String	
 							
  Returns: None
  *****************************************************/
-        public TaxCal(int s,          //salary
+        public TaxCal(double s,          //salary
                       String c){        //city
                                   
             id = nextID++; //sets id number for tax cal
@@ -74,8 +77,54 @@ package CompanyMVC;
         
  	// ********** accessors **********
  	
+    //*****************************************************
+    // Purpose: gets the income tax the employee needs to pay
+    // Interface: IN: na
+    // Returns: tax
+    // *****************************************************
+        public double getTax(){
+            
+            setTax(); //sets which tax system
+            getIndex(); //sets starting index
         
-    
+        taxCost = CalTax(salary, index); //calculates tax cost
+        
+        return taxCost;
+        }//end of get tax
+        
+    //*****************************************************
+    // Purpose: gets the index for tax
+    // Interface: IN: na
+    // Returns: index
+    // *****************************************************
+        public int getIndex(){
+            
+        //sets index to the length of string -1 since indexs start at zero
+        index = (tax.length-1); 
+        
+        //reduces index till its in the right bracket
+        for(double i = salary; i<=tax[index][0]; index--){  
+        }//end of for loop
+        
+        return index;
+        }//end of get Index
+        
+    //*****************************************************
+    // Purpose: calculates the income tax
+    // Interface: IN: salary and index
+    // Returns: income tax
+    // *****************************************************
+        private double CalTax(double sal, int n){
+            if (n<=0){
+            return 0; //returns tax cost 0 since in bottom bracket
+        }//end of if
+        else{
+            //returns tax cost of money in current bracket plus a return to
+            //calculate the next bracket down
+            return((sal-tax[n][0])*tax[n][1] + CalTax(tax[n][0], n-1));
+        }//end of else
+        }//end of CalTax
+          
  	// ********** mutators **********
         
     //*****************************************************
@@ -83,7 +132,7 @@ package CompanyMVC;
     // Interface: IN: new next id number
     // Returns: na
     // *****************************************************
-        public void setSalary(int salary) {
+        public void setSalary(double salary) {
             this.salary = salary;
         }//end of setSalary
         
@@ -101,7 +150,7 @@ package CompanyMVC;
     // Interface: IN: None
     // Returns: None
     // *****************************************************
-        public void setTax(){
+        private void setTax(){
             if (city.equals("OT")){
                 tax = CAtax; //sets tax to canadian tax
             }//end of if ottawa
@@ -112,5 +161,14 @@ package CompanyMVC;
                 tax = UStax;
             }//end of else 
         }//end of set Tax
-        
+    
+    //*****************************************************
+    // Purpose: set next id to last loaded employee/taxcal id + 1
+    // Interface: IN: new next id number
+    // Returns: na
+    // *****************************************************
+     public void setNextId(int n){
+        nextID = n;
+     } // end setNextID
+     
  }  // end class

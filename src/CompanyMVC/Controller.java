@@ -41,7 +41,7 @@ package CompanyMVC;
     // Interface: IN: first name, last name, city, position, salary
     // Returns: NA
     // *****************************************************
-        protected void submitButtonClicked(String fn, String ln, String c, String p, int s){
+        protected void submitButtonClicked(String fn, String ln, String c, String p, double s){
             e = new Employee(fn, ln, c, p, s); //creates new employee with data entered
             employees.add(e); //adds new employee to list
             ui.employeeListModel.addElement(e); //adds new employee to list on GUI

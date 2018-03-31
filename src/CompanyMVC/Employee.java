@@ -29,9 +29,11 @@ package CompanyMVC;
         private String city; //city of employment
         private String position; //position of employment
         
-        private int salary = 0; //yearly salary
+        private double salary = 0; //yearly salary
         private int id = 0; //employee number
-     
+        
+        TaxCal tc;  //tax calculator for employee
+        
  	// ********** constructors ***********
  /*****************************************************
  Purpose: create a new Employee object with default values
@@ -48,6 +50,9 @@ package CompanyMVC;
             position = "XX";//sets a default value for position
             
             salary = 0;//sets a default value for salary
+            
+            tc = new TaxCal(); //creates default tax cal
+            
         }//end of default constructor
         
 /*****************************************************
@@ -56,7 +61,7 @@ package CompanyMVC;
 		lastName ln: String
 		city c: String
 		position p: String
-		salary s: int
+		salary s: double
 							
  Returns: None
  *****************************************************/
@@ -64,7 +69,7 @@ package CompanyMVC;
                         String ln,       //last name
                         String c,        //city
                         String p,        //position
-                        int s){          //salary
+                        double s){          //salary
             id = nextID++; //sets employee id for employee
             
             firstName = fn; //sets initalized value for first name
@@ -73,6 +78,9 @@ package CompanyMVC;
             position = p; //sets initalized value for position
             
             salary = s; //sets initalized value for salary
+            
+            tc = new TaxCal(s, c); //creates TaxCal with initalized values
+            
         }//end of initialized constructor
         
  	// ********** accessors **********
@@ -118,7 +126,7 @@ package CompanyMVC;
     // Interface: IN: na
     // Returns: salary
     // *****************************************************
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }//end of getSalary
     
@@ -130,9 +138,15 @@ package CompanyMVC;
     public int getId() {
         return id;
     }//end of getID
-
     
-     
+    //*****************************************************
+    // Purpose: gets income tax for employee
+    // Interface: IN: na
+    // Returns: tax
+    // *****************************************************
+    public double getTax() {
+        return tc.getTax();
+    }//end of getID
  	// ********** mutators **********
     
     //*****************************************************
@@ -160,6 +174,7 @@ package CompanyMVC;
     // *****************************************************
     public void setCity(String city) {
         this.city = city;
+        tc.setCity(city);
     }//end of setCity
     
     //*****************************************************
@@ -178,6 +193,7 @@ package CompanyMVC;
     // *****************************************************
     public void setSalary(int salary) {
         this.salary = salary;
+        tc.setSalary(salary);
     }//end of setSalary
 
     //*****************************************************
@@ -196,6 +212,17 @@ package CompanyMVC;
     // *****************************************************
      public void setNextId(int n){
         nextID = n;
+        tc.setNextId(n);
      } // end setNextID
- 
+     
+    //*****************************************************
+    // Purpose: override the toString method
+    // Interface: IN: na
+    // Returns: formatted output
+    // *****************************************************
+     public String toString(){
+         String strin = "Employee ID " + id + ", " + position + ", " + city + ", " + salary;
+        return strin;
+     }//end of toString
+     
  }  // end class
