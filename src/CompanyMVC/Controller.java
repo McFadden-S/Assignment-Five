@@ -12,6 +12,7 @@ package CompanyMVC;
  * *************************************************************/
  
  // import files here as needed
+import java.text.DecimalFormat;
  import java.util.ArrayList;
 
 
@@ -27,11 +28,17 @@ package CompanyMVC;
         ArrayList<Employee> employees = new ArrayList<>(); //creates a list of employees
         private Employee e; //variable used to hold new employee
         private String nl = System.lineSeparator(); //used in output formating to create new lines
-     
+        
+        DecimalFormat df1 = new DecimalFormat("$###,###,###,###,###.00");
+        
  	// ********** constructors ***********
  	
+    //*****************************************************
+    // Purpose: constructure for controller object
+    // Interface: IN: na
+    // Returns: na
+    // *****************************************************
         public Controller(){
-            
         }//end of constructer
      
  	// ********** accessors **********
@@ -46,12 +53,35 @@ package CompanyMVC;
             employees.add(e); //adds new employee to list
             ui.employeeListModel.addElement(e); //adds new employee to list on GUI
         }//end of SubmitButtonClicked
-        
+    
+    //*****************************************************
+    // Purpose: updates employees ids have list has been loaded
+    // Interface: IN: employee
+    // Returns: none
+    // *****************************************************
         protected void loadListButtonClicked(Employee e){
             int nid = e.getId();
             e.setNextId(++nid);
-        }
+        }//end of loadListButtonClicked
         
+    //*****************************************************
+    // Purpose: gets employees information
+    // Interface: IN: index
+    // Returns: string of information
+    // *****************************************************
+        protected String getEmployee(int n){
+            String strin = "";
+                //formats a string with the employee's information
+            strin = "Name: " + (employees.get(n)).getFirstName() + " " + 
+                    (employees.get(n)).getLastName() + nl;
+            strin += "ID: " + (employees.get(n)).getId() + nl;
+            strin += "City: " + (employees.get(n)).getCityName() + nl;
+            strin += "Position: " + (employees.get(n)).getPositionName() + nl;
+            strin += "Salary: " + df1.format((employees.get(n)).getSalary()) + nl;
+            strin += "Income Tax: " + df1.format((employees.get(n)).getTax()) + nl;
+            
+            return strin;
+        }//end of getEmployee
         
  	// ********** mutators **********
     //*****************************************************

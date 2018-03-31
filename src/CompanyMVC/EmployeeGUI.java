@@ -38,7 +38,7 @@ public class EmployeeGUI extends javax.swing.JFrame {
     private final int[] ESAL = new int[] {50000, 130000, 10000, 5000};
     //Comp Sci Salary: first is min, second is max
     //third is major tics, fourth is minor tics
-    private final int[] CSSAL = new int[] {75000, 140000, 10000, 500};
+    private final int[] CSSAL = new int[] {75000, 140000, 5000, 2500};
     //Sales Salary: first is min, second is max
     //third is major tics, fourth is minor tics
     private final int[] SSAL = new int[] {40000, 80000, 5000, 2500};
@@ -97,6 +97,19 @@ public class EmployeeGUI extends javax.swing.JFrame {
         SalarySlider = new javax.swing.JSlider();
         SubmitBtn = new javax.swing.JButton();
         ClearBtn = new javax.swing.JButton();
+        InfoPanel = new javax.swing.JPanel();
+        InfoPanelLabel = new javax.swing.JLabel();
+        EmployeeListScrollPane = new javax.swing.JScrollPane();
+        EmployeeList = new javax.swing.JList<>();
+        EmployeeListLabel = new javax.swing.JLabel();
+        EmployeeDetailScrollPane = new javax.swing.JScrollPane();
+        EmployeeDetailTxt = new javax.swing.JTextArea();
+        EmployeeDetailLabel = new javax.swing.JLabel();
+        SaveBtn = new javax.swing.JButton();
+        InformationControlsLabel = new javax.swing.JLabel();
+        LoadBtn = new javax.swing.JButton();
+        RemoveBtn = new javax.swing.JButton();
+        EditBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Company");
@@ -243,7 +256,106 @@ public class EmployeeGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ClearBtn))
                     .addComponent(SalarySlider, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        InfoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        InfoPanelLabel.setText(" Employee Information ");
+        InfoPanelLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        EmployeeList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        EmployeeList.setModel(employeeListModel);
+        EmployeeList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                EmployeeListValueChanged(evt);
+            }
+        });
+        EmployeeListScrollPane.setViewportView(EmployeeList);
+
+        EmployeeListLabel.setText("Employee List");
+
+        EmployeeDetailScrollPane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        EmployeeDetailTxt.setColumns(20);
+        EmployeeDetailTxt.setRows(5);
+        EmployeeDetailScrollPane.setViewportView(EmployeeDetailTxt);
+
+        EmployeeDetailLabel.setText("Employee Detail");
+
+        SaveBtn.setText("Save list");
+        SaveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveBtnActionPerformed(evt);
+            }
+        });
+
+        InformationControlsLabel.setText("Employee Information Controls");
+
+        LoadBtn.setText("Load List");
+
+        RemoveBtn.setText("Remove Employee");
+
+        EditBtn.setText("Edit Employee");
+
+        javax.swing.GroupLayout InfoPanelLayout = new javax.swing.GroupLayout(InfoPanel);
+        InfoPanel.setLayout(InfoPanelLayout);
+        InfoPanelLayout.setHorizontalGroup(
+            InfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InfoPanelLayout.createSequentialGroup()
+                .addGroup(InfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(InfoPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(InfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(InfoPanelLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(EmployeeListScrollPane)
+                            .addComponent(EmployeeDetailScrollPane)))
+                    .addGroup(InfoPanelLayout.createSequentialGroup()
+                        .addGroup(InfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(InfoPanelLayout.createSequentialGroup()
+                                .addGap(212, 212, 212)
+                                .addComponent(EmployeeListLabel))
+                            .addGroup(InfoPanelLayout.createSequentialGroup()
+                                .addGap(205, 205, 205)
+                                .addComponent(EmployeeDetailLabel))
+                            .addGroup(InfoPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(SaveBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(LoadBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(RemoveBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(EditBtn)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(InfoPanelLayout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(InformationControlsLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        InfoPanelLayout.setVerticalGroup(
+            InfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(InfoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(InfoPanelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(EmployeeListLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EmployeeListScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(EmployeeDetailLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EmployeeDetailScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(InformationControlsLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(InfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SaveBtn)
+                    .addComponent(LoadBtn)
+                    .addComponent(RemoveBtn)
+                    .addComponent(EditBtn))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -252,11 +364,16 @@ public class EmployeeGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(EmployeePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 438, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(InfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(EmployeePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(InfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -273,14 +390,13 @@ public class EmployeeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_FirstNameTxtActionPerformed
 
     private void PositionComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PositionComboActionPerformed
-        System.out.println("Position Action Performed");
         if (PositionCombo.getSelectedItem().toString().equals("Select One")){
             SetSlider(SAL); //sets back to default
             SalarySlider.setEnabled(false); //disables salary slider
             SubmitBtn.setEnabled(false); //disables submit button
         }//end of if postion combo equals Select One
         
-        if (PositionCombo.getSelectedItem().toString().equals("Plant Worker")){
+        else if (PositionCombo.getSelectedItem().toString().equals("Plant Worker")){
             SetSlider(PWSAL); //sets slider with plant worker values
             SalarySlider.setEnabled(true); //enables salary slider
             SubmitBtn.setEnabled(true); //enables submit button
@@ -367,7 +483,6 @@ public class EmployeeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_CityComboActionPerformed
 
     private void CityComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CityComboItemStateChanged
-        System.out.println("ACTION PERFORMED");
         if (CityCombo.getSelectedItem().toString().equals("Select One")){
             PositionCombo.setSelectedIndex(0); //sets back to default
             PositionCombo.setEnabled(false); //disables
@@ -380,7 +495,7 @@ public class EmployeeGUI extends javax.swing.JFrame {
           Ci = "NY"; //sets city designation
         }//end of if New York
         
-        else if (CityCombo.getSelectedItem().toString().equals("Silicon Vally")){
+        else if (CityCombo.getSelectedItem().toString().equals("Silicon Valley")){
           ResetPositionCombo(SVPOS); //resets combo with Silicon Valley Value
           PositionCombo.setEnabled(true); //allows access to second box
           
@@ -421,35 +536,64 @@ public class EmployeeGUI extends javax.swing.JFrame {
         
         ResetInputs(); //resets/clears inputs
     }//GEN-LAST:event_SubmitBtnActionPerformed
+
+    private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SaveBtnActionPerformed
+
+    private void EmployeeListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_EmployeeListValueChanged
+        
+        int n = EmployeeList.getSelectedIndex(); //gets employee selected
+        
+        EmployeeDetailTxt.setText(con.getEmployee(n)); //shows info on selected employee
+        
+    }//GEN-LAST:event_EmployeeListValueChanged
     
+    //*****************************************************
+    // Purpose: resets city combo box
+    // Interface: IN: na
+    // Returns: na
+    // *****************************************************
     private void ResetCityCombo(){
-        System.out.println("FIRST COMBO RESET");
         int len = CityCombo.getItemCount()-1;//variable for number of cities in combo box
         
         for(int i = 0; i<len; i++){
-            System.out.println(CityCombo.getItemCount());
-            CityCombo.removeItemAt(1);
+            CityCombo.removeItemAt(1); //removes citys from box
         }
         for(int i = 0; i<CITL.length; i++)
-            CityCombo.addItem(CITL[i]);
+            CityCombo.addItem(CITL[i]); //adds new cities to box
     }//end of ResetCityCombo
     
+    //*****************************************************
+    // Purpose: resets position combo box
+    // Interface: IN: position array
+    // Returns: na
+    // *****************************************************
     private void ResetPositionCombo(String[] p){
-        System.out.println("SECOND COMBO RESET");
         int len = PositionCombo.getItemCount()-1;//variable for number of positions in combo box
         
         for(int i = 0; i<len; i++)
-           PositionCombo.removeItemAt(1);
+           PositionCombo.removeItemAt(1); //removes positions from box
         
         for(int i = 0; i<p.length; i++)
-            PositionCombo.addItem(p[i]);
+            PositionCombo.addItem(p[i]); //adds new positions to box
     }//end of ResetPositionCombo
     
+    //*****************************************************
+    // Purpose: resets name fields
+    // Interface: IN: na
+    // Returns: na
+    // *****************************************************
     private void ResetNames(){
         FirstNameTxt.setText("");//resets first name field
         LastNameTxt.setText(""); // resets last name field
     }//end of resetNames
     
+    //*****************************************************
+    // Purpose: sets up slider and labels for slider
+    // Interface: IN: salary array
+    // Returns: na
+    // *****************************************************
     private void SetSlider (int[] sv){
         int mid = (sv[0] + sv[1])/2;
         
@@ -464,12 +608,26 @@ public class EmployeeGUI extends javax.swing.JFrame {
         SalarySlider.setValue(mid);//sets pointer at mid point
     }//end of SetSlider
     
+    //*****************************************************
+    // Purpose: resets all inputs
+    // Interface: IN: na
+    // Returns: na
+    // *****************************************************
     private void ResetInputs(){
        ResetCityCombo(); //resets city combo box
        ResetPositionCombo(POSL); //resets psoition combo box
        ResetNames(); //resets name fields
        SetSlider(SAL); //resets slider
     }//end of reset inputs
+    
+    //*****************************************************
+    // Purpose: set controller for gui
+    // Interface: IN: controller
+    // Returns: na
+    // *****************************************************
+    protected void setController (Controller C){
+        this.con = C; //sets controller to new value
+    }//end of setController
     
     /**
      * @param args the command line arguments
@@ -511,15 +669,28 @@ public class EmployeeGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> CityCombo;
     private javax.swing.JLabel CityLabel;
     private javax.swing.JButton ClearBtn;
+    private javax.swing.JButton EditBtn;
+    private javax.swing.JLabel EmployeeDetailLabel;
+    private javax.swing.JScrollPane EmployeeDetailScrollPane;
+    private javax.swing.JTextArea EmployeeDetailTxt;
+    private javax.swing.JList<String> EmployeeList;
+    private javax.swing.JLabel EmployeeListLabel;
+    private javax.swing.JScrollPane EmployeeListScrollPane;
     private javax.swing.JPanel EmployeePanel;
     private javax.swing.JLabel FirstNameLabel;
     private javax.swing.JTextField FirstNameTxt;
+    private javax.swing.JPanel InfoPanel;
+    private javax.swing.JLabel InfoPanelLabel;
+    private javax.swing.JLabel InformationControlsLabel;
     private javax.swing.JLabel LastNameLabel;
     private javax.swing.JTextField LastNameTxt;
+    private javax.swing.JButton LoadBtn;
     private javax.swing.JComboBox<String> PositionCombo;
     private javax.swing.JLabel PositionLabel;
+    private javax.swing.JButton RemoveBtn;
     private javax.swing.JLabel SalaryLabel;
     private javax.swing.JSlider SalarySlider;
+    private javax.swing.JButton SaveBtn;
     private javax.swing.ButtonGroup SearchRB;
     private javax.swing.JButton SubmitBtn;
     // End of variables declaration//GEN-END:variables

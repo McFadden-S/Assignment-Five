@@ -147,6 +147,77 @@ package CompanyMVC;
     public double getTax() {
         return tc.getTax();
     }//end of getID
+    
+    //*****************************************************
+    // Purpose: gets the city name of employment
+    // Interface: IN: na
+    // Returns: city name
+    // *****************************************************
+    public String getCityName(){
+        String cityName = "";
+        
+        if (city.toString().equals("NY")){
+          cityName = "New York"; //sets city name
+        }//end of if New York
+        
+        else if (city.toString().equals("SV")){
+          cityName = "Silicon Valley";//sets city name
+        }//end of if Silicon Vally
+        
+        else if (city.toString().equals("OT")){
+          cityName = "Ottawa";//sets city name
+        }//end of if Ottawa
+        
+        else if (city.toString().equals("BI")){
+          cityName = "Beijing";//sets city name
+        }//end of if Beijing
+        
+        return cityName;
+    }//end of getCityName
+    
+    //*****************************************************
+    // Purpose: gets the name of employee's position
+    // Interface: IN: na
+    // Returns: position name
+    // *****************************************************
+    public String getPositionName (){
+        String Po = "";
+        
+        if (position.toString().equals("PW")){
+            Po = "Plant Worker";//sets position name
+        }//end of if position equals plant worker
+        
+        else if (position.toString().equals("RD")){
+            Po = "R&D Scientist";//sets position name
+        }//end of if position equals R&D Scientist
+        
+        else if (position.toString().equals("E")){
+            Po = "Engineer";//sets position name
+        }//end of if position equals Engineer
+        
+        else if (position.equals("CS")){
+            Po = "Computer Scientist";//sets position name
+        }//end of if position Computer Scientist
+        
+        else if (position.toString().equals("S")){
+            Po = "Sales";//sets position name
+        }//end of if position equals Sales
+        
+        else if (position.toString().equals("MA")){
+            Po = "MA";//sets position name
+        }//end of if position equals Manager
+        
+        else if (position.toString().equals("L")){
+            Po = "Lawyer";//sets position name
+        }//end of if position equals Lawyer
+        
+        else{
+            Po = "Marketing"; //sets position name
+        }//end of else position equals Marketing
+        
+        return Po;
+    }//end of get PositionName
+    
  	// ********** mutators **********
     
     //*****************************************************

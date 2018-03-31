@@ -7,11 +7,14 @@ package CompanyMVC;
  * Assignment:      Assignment Five
  * Program Name:    Company MVC
  *
- * Description:     REQUIRED
+ * Description:     This program will manage applications for job in
+ *                  different positions and cities, when employees are added
+ *                  they will be added to the list where they can be saved,
+ *                  edited or removed
  *
- * Input: data to be input
+ * Input:           Employee information in the GUI
  *
- * Output: results to be output
+ * Output:          List of Employees and information on employees in GUI
  ***********************************************************************/
  
  // import java libraries here as needed
@@ -28,74 +31,27 @@ public class CompanyMVCMain {  // begin class
     // ********* declaration of constants **********
     
     // ********** declaration of variables **********
-    
-    	String strin;				// string data input from keyboard
-    	String strout;				// processed info string to be output
-    	String bannerOut;			// string to print banner to message dialogs
-    	
-    	String prompt;				// prompt for use in input dialogs
-    	
-    	String delim = "[ :]+";		// delimiter string for splitting input string
-    	String tabSpace = "      ";	// six spaces
-    	
-    // create instances of objects for i/o and formatting
-    
-    	//ConsoleReader console = new ConsoleReader(System.in);
-    	//DecimalFormat df1 = new DecimalFormat("$##.00");
-    	
-    	//BufferedReader fin = new BufferedReader(new FileReader("name of file"));
-    	PrintWriter fout = new PrintWriter(new BufferedWriter(new FileWriter("testOut.txt")));
     	
     // ********** Print output Banner **********
-    
-    	System.out.println("*******************************************");
-    	System.out.println("Name:		your name here");
-    	System.out.println("Class:		CS20S");
-    	System.out.println("Assignment:	Ax Qy");
-    	System.out.println("*******************************************");
-
-    	bannerOut = "*******************************************\n";
-    	bannerOut += "Name:		your name here\n";
-    	bannerOut += "Class:		CS20S\n";
-    	bannerOut += "Assignment:	Ax Qy\n";
-    	bannerOut += "*******************************************\n\n";
-    	
-    	fout.println("*******************************************");
-    	fout.println("Name:		your name here");
-    	fout.println("Class:		CS20S");
-    	fout.println("Assignment:	Ax Qy");
-    	fout.println("*******************************************");
  	    	
     // ************************ get input **********************
 
-    /*	prompt = "Enter your prompt text here. \n";	
-    	prompt += "you may need to add additional lines\n";
-    	prompt += "or delete some of these prompt lines.\n\n";
-    
-    	
-    	strin = JOptionPane.showInputDialog(bannerOut + prompt);	 
-    */
-    	/* **********************************
-    	 * split the input string into tokens
-    	 * use the value in delim as the delimieter
-    	 * uncomment the line to use it.
-    	 ************************************/
-    	//String[] tokens = strin.split(delim);
-    	
-
     // ************************ processing ***************************
+    
+    EmployeeGUI employeeUI = new EmployeeGUI(); //creates new GUI object
+    employeeUI.setVisible(true); //sets it to visible
+    
+    Controller controller = new Controller(); //creates new controleer object
+    
+    controller.setUI(employeeUI); //sets the ui controller interfaces with
+    employeeUI.setController(controller); //sets controller that ui interfaces with
     
     // ************************ print output ****************************
 
-    
         // ******** closing message *********
         
         System.out.println("end of processing.");
-        fout.format("%n%nend of processing.");
         
         // ***** close streams *****
-        
-        //fin.close();			// close input buffer
-        fout.close();			// close output buffer
     }  // end main
 }  // end class
