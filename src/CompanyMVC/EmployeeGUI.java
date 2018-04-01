@@ -545,6 +545,7 @@ public class EmployeeGUI extends javax.swing.JFrame {
        
        if(editing){
            ResetSetUp(); //resets application are to orignal state
+           editing = false; //enditing has been canceled
        }//end of if
     }//GEN-LAST:event_ClearBtnActionPerformed
 
@@ -565,6 +566,7 @@ public class EmployeeGUI extends javax.swing.JFrame {
             con.editEmployee(firstName, lastName, Ci, Po, salary, EditIndex);
             ResetSetUp(); //sets application side back to original form
             EmployeeList.clearSelection(); //clears selection of list
+            editing = false; //editing has been completed
         }//end of if
         else{
             //sends data to controller
@@ -733,8 +735,12 @@ public class EmployeeGUI extends javax.swing.JFrame {
         for (Employee e: list){
             employeeListModel.addElement(e); //populates list
         }//end of for
+        try{
         //adjusts next id so duplicate ids arent created
         con.loadListButtonClicked(list.get(list.size()-1));
+        }//end of try
+        catch(ArrayIndexOutOfBoundsException e){
+        }//end of catch
     }//end of loadPatientListModel
     
     //*****************************************************
