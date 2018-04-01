@@ -34,6 +34,7 @@ import java.text.DecimalFormat;
         private Employee e; //variable used to hold new employee
         private String nl = System.lineSeparator(); //used in output formating to create new lines
         
+        //used to format output
         private DecimalFormat df1 = new DecimalFormat("$###,###,###,###,###.00");
         
  	// ********** constructors ***********
@@ -65,8 +66,8 @@ import java.text.DecimalFormat;
     // Returns: none
     // *****************************************************
         protected void loadListButtonClicked(Employee e){
-            int nid = e.getId();
-            e.setNextId(++nid);
+            int nid = e.getId(); //gets latest id/highest
+            e.setNextId(++nid);// sets next id to 1+ latest id
         }//end of loadListButtonClicked
         
     //*****************************************************
@@ -88,11 +89,17 @@ import java.text.DecimalFormat;
             return strin;
         }//end of getEmployee
         
+    //*****************************************************
+    // Purpose: Saves employee list as a file
+    // Interface: IN: NA
+    // Returns: NA
+    // *****************************************************
         protected void writeEmployeeList(){
             try{
                 FileOutputStream fos = new FileOutputStream("Employees.tmp");
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
                 
+                //writes employees into file
                 oos.writeObject(employees);
                 oos.close();
             }//end of try
@@ -101,12 +108,18 @@ import java.text.DecimalFormat;
             }//end of catch io exception 
         }//end of writePatientList
         
+    //*****************************************************
+    // Purpose: reads employee list for saved file 
+    // Interface: IN: NA
+    // Returns: NA
+    // *****************************************************
         protected void getEmployeeList(){
             try{
                 FileInputStream fis = new FileInputStream("Employees.tmp");
                 ObjectInputStream ois = new ObjectInputStream(fis);
             
                 try{
+                    //reads employees into array
                     employees = (ArrayList<Employee>)ois.readObject();
                     
                 }//end of try
@@ -127,4 +140,21 @@ import java.text.DecimalFormat;
         public void setUI (EmployeeGUI UI){
             this.ui = UI;
         }//end of setUI
+        
+    //*****************************************************
+    // Purpose: Edits employee information
+    // Interface: IN: first name, last name, city, position, salary and index
+    // Returns: NA
+    // *****************************************************
+        public void editEmployee(String fn, String ln, String c, String p, double s, int n){
+            employees.get(n).setFirstName(fn); //sets new value for first name
+            employees.get(n).setLastName(ln); //sets new value for last name
+            employees.get(n).setCity(c); //sets new value for city
+            employees.get(n).setPosition(p); //sets new value for position
+            employees.get(n).setSalary(s); //sets new value for salary
+
+            //assigns new employee to list
+            ui.employeeListModel.setElementAt(employees.get(n), n);
+        }//end editEmployee
+        
  }  // end class

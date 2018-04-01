@@ -68,6 +68,9 @@ public class EmployeeGUI extends javax.swing.JFrame {
     private String Po = ""; //string for position designation
     
     private boolean AllSaved = true; //boolean for if all shown data is saved
+    private boolean editing = false; //boolean for if employee editing
+    
+    private int EditIndex = 0; //id of employee being edited
     
     /**
      * Creates new form EmployeeGUI
@@ -311,6 +314,11 @@ public class EmployeeGUI extends javax.swing.JFrame {
         });
 
         EditBtn.setText("Edit Employee");
+        EditBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout InfoPanelLayout = new javax.swing.GroupLayout(InfoPanel);
         InfoPanel.setLayout(InfoPanelLayout);
@@ -534,6 +542,10 @@ public class EmployeeGUI extends javax.swing.JFrame {
 
     private void ClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearBtnActionPerformed
        ResetInputs(); //resets inputs
+       
+       if(editing){
+           ResetSetUp(); //resets application are to orignal state
+       }//end of if
     }//GEN-LAST:event_ClearBtnActionPerformed
 
     private void SubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitBtnActionPerformed
@@ -545,11 +557,20 @@ public class EmployeeGUI extends javax.swing.JFrame {
         
         double salary = SalarySlider.getValue(); //holds employee's salary
         
-        //sends data to controller
-        con.submitButtonClicked(firstName, lastName, Ci, Po, salary);
-        
         AllSaved = false; //new employee has been added so all is not saved
         ResetInputs(); //resets/clears inputs
+        
+        if (editing){
+            //sends data to controller to update employee records
+            con.editEmployee(firstName, lastName, Ci, Po, salary, EditIndex);
+            ResetSetUp(); //sets application side back to original form
+            EmployeeList.clearSelection(); //clears selection of list
+        }//end of if
+        else{
+            //sends data to controller
+            con.submitButtonClicked(firstName, lastName, Ci, Po, salary);
+        }//end of else
+        
     }//GEN-LAST:event_SubmitBtnActionPerformed
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
@@ -594,14 +615,33 @@ public class EmployeeGUI extends javax.swing.JFrame {
         
         int n = EmployeeList.getSelectedIndex(); //gets employee selected
         
+        if (n==-1){ //if nothing is selected index equals -1
+             //clears info screen when nothing is selected
+             EmployeeDetailTxt.setText(""); 
+         }//end of if sentienl value
+        else{
         con.employees.remove(n); //removes selected employee from controller array
         employeeListModel.remove(n); //removes selected employee from list
         
         AllSaved = false; //employee values have been change
         
-        resetIDS();
-        
+        resetIDS(); //resets ids to adjust for gap that has been created
+        }//end of else
     }//GEN-LAST:event_RemoveBtnActionPerformed
+
+    private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
+        
+        int n = EmployeeList.getSelectedIndex(); //gets employee Selected
+        EditIndex = n; //sets index of employee being edited (used for saving)
+        
+        if (n==-1){ //if nothing is selected index equals -1 
+         }//end of if sentienl value
+        else{
+            EditSetUp(n); //sets up application side for editing employee
+            editing = true; //sets editing to true since program is in editing mode
+        }//end of else
+        
+    }//GEN-LAST:event_EditBtnActionPerformed
     
     //*****************************************************
     // Purpose: resets city combo box
@@ -683,15 +723,25 @@ public class EmployeeGUI extends javax.swing.JFrame {
         this.con = C; //sets controller to new value
     }//end of setController
     
+    //*****************************************************
+    // Purpose: loads an employee arraylist into the employee list
+    // Interface: IN: employee array list
+    // Returns: na
+    // *****************************************************
     protected void loadEmployeeListModel(ArrayList<Employee> list){
-        employeeListModel.removeAllElements();
+        employeeListModel.removeAllElements(); //clears list
         for (Employee e: list){
-            employeeListModel.addElement(e);
+            employeeListModel.addElement(e); //populates list
         }//end of for
-        
+        //adjusts next id so duplicate ids arent created
         con.loadListButtonClicked(list.get(list.size()-1));
     }//end of loadPatientListModel
     
+    //*****************************************************
+    // Purpose: resets the employee id when employee is removed
+    // Interface: IN: na
+    // Returns: na
+    // *****************************************************
     private void resetIDS(){
         int nextID = 1000;//base id
         
@@ -701,6 +751,78 @@ public class EmployeeGUI extends javax.swing.JFrame {
         }//end of for
         loadEmployeeListModel(con.employees);//loads list with new values
     }//end of resetIDS
+    
+    //*****************************************************
+    // Purpose: Sets application side to a editing side
+    // Interface: IN: index
+    // Returns: na
+    // *****************************************************
+    private void EditSetUp(int n){
+        
+        ApplicationLabel.setText(" Employee Edit "); //sets new label
+        SubmitBtn.setText(" Change "); //sets change button
+        ClearBtn.setText(" Cancel "); //sets cancel button
+        
+        //sets names into their fields
+        FirstNameTxt.setText(con.employees.get(n).getFirstName());
+        LastNameTxt.setText(con.employees.get(n).getLastName());
+        
+        //sets combo boxes selections to match employee
+        CityCombo.setSelectedIndex(CityIndex(n));
+        PositionCombo.setSelectedIndex(PositionIndex(n));
+        
+        //sets salary slider to match employee
+        SalarySlider.setValue((int)con.employees.get(n).getSalary());
+        
+    }//end of EditSetUp
+    
+    //*****************************************************
+    // Purpose: returns application side to original state
+    // Interface: IN: na
+    // Returns: na
+    // *****************************************************
+    private void ResetSetUp(){
+        ApplicationLabel.setText(" Application "); //resets label
+        SubmitBtn.setText(" Submit "); //resets submit button
+        ClearBtn.setText(" Clear "); //resets clear button
+    }//end resetSetUp
+    
+    //*****************************************************
+    // Purpose: returns the index for position combo box
+    // Interface: IN: employee index
+    // Returns: position combo box index
+    // *****************************************************
+    private int PositionIndex(int n){
+        
+        int index = 0; //variable for the index returned
+        
+        for (int i=0;i<PositionCombo.getItemCount();i++) {
+            if (PositionCombo.getItemAt(i).equals(con.employees.get(n).getPositionName())) {
+            index = i; //sets index to current index
+            break;//breaks the loop since value required has been found
+            }//end of if
+        }//end of for loop
+        
+        return index;
+    }//end of positionIndex
+    
+    //*****************************************************
+    // Purpose: returns the index for city combo box
+    // Interface: IN: employee index
+    // Returns: city combo box index
+    // *****************************************************
+    private int CityIndex(int n){
+        int index = 0; //variable for the index returned
+        
+        for (int i=0;i<CityCombo.getItemCount();i++) {
+            if (CityCombo.getItemAt(i).equals(con.employees.get(n).getCityName())) {
+            index = i; //sets index to current index
+            break;//breaks the loop since value has been found
+            }//end of if
+        }//end of for loop
+        
+        return index;
+    }//end of city Index
     
     /**
      * @param args the command line arguments

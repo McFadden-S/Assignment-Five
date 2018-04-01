@@ -29,13 +29,9 @@ public class CompanyMVCMain {  // begin class
     public static void main(String[] args) throws IOException{  // begin main
     
     // ********* declaration of constants **********
-    
     // ********** declaration of variables **********
-    	
-    // ********** Print output Banner **********
- 	    	
+    // ********** Print output Banner ********** 	
     // ************************ get input **********************
-
     // ************************ processing ***************************
     
     EmployeeGUI employeeUI = new EmployeeGUI(); //creates new GUI object
@@ -46,11 +42,14 @@ public class CompanyMVCMain {  // begin class
     controller.setUI(employeeUI); //sets the ui controller interfaces with
     employeeUI.setController(controller); //sets controller that ui interfaces with
     
-    employeeUI.con.getEmployeeList();
+    try{
+    employeeUI.con.getEmployeeList(); //loads saved list on open
+    }//end of try
+    catch(ArrayIndexOutOfBoundsException e){
+    }//end of catch
+    
     // ************************ print output ****************************
-
-        // ******** closing message *********
-        
+        // ******** closing message *********  
         System.out.println("end of processing.");
         
         // ***** close streams *****

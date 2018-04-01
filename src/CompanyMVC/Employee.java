@@ -245,7 +245,7 @@ package CompanyMVC;
     // *****************************************************
     public void setCity(String city) {
         this.city = city;
-        tc.setCity(city);
+        tc.setCity(city); //changes city in taxcal same time as employee
     }//end of setCity
     
     //*****************************************************
@@ -262,9 +262,9 @@ package CompanyMVC;
     // Interface: IN: new next id number
     // Returns: na
     // *****************************************************
-    public void setSalary(int salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
-        tc.setSalary(salary);
+        tc.setSalary(salary); //changes salary in tax call sametime as employee
     }//end of setSalary
 
     //*****************************************************
@@ -291,6 +291,7 @@ package CompanyMVC;
     // Returns: formatted output
     // *****************************************************
      public String toString(){
+         //formating string which will be returned
          String strin = "Employee ID " + id + ", " + position + ", " + city + ", " + salary;
         return strin;
      }//end of toString
